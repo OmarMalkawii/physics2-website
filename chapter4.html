@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 26: Capacitance and Dielectrics - Physics 2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="index.html">Physics 2</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chapter1.html">Electric Fields</a></li>
+                    <li><a href="chapter2.html">Gauss's Law</a></li>
+                    <li><a href="chapter3.html">Electric Potential</a></li>
+                    <li class="current"><a href="chapter4.html">Capacitance</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article class="chapter-content">
+            <h2>Chapter 26: Capacitance and Dielectrics</h2>
+
+            <section id="introduction">
+                <h3>Introduction [cite: 21]</h3>
+                <p>Capacitance is the ability of a system to store electric charge per unit voltage. Dielectrics are
+                    insulating materials placed between the plates of a capacitor that increase its capacitance by
+                    reducing the effective electric field, which allows more charge to be stored at the same voltage.
+                    [cite: 22]</p>
+            </section>
+
+            <section id="key-formulas" class="key-formulas">
+                <h3>Key Formulas [cite: 23]</h3>
+                <ul>
+                    <li>$C = Q / V$ (Capacitance C, Charge Q, Voltage V)</li>
+                    <li>$C = \epsilon * A / d$ (Capacitance for parallel plates: permittivity $\epsilon$, Area A,
+                        distance d)</li>
+                    <li>$U = 1/2 * C * V^2$ (Energy stored in a capacitor)</li>
+                    <li>For a dielectric: $C' = \kappa * C_0$ (where $\kappa$ is the dielectric constant, $C_0$ is
+                        capacitance in vacuum)</li>
+                    <li>$\epsilon = \kappa * \epsilon_0$</li>
+                </ul>
+            </section>
+
+            <section id="calculator" class="calculator">
+                <h3>Parallel Plate Capacitor Calculator [cite: 23]</h3>
+                <label for="area_a">Plate Area (A, in m<sup>2</sup>):</label>
+                <input type="number" id="area_a" step="any" placeholder="e.g., 0.01">
+
+                <label for="distance_d_cap">Plate Separation (d, in meters m):</label>
+                <input type="number" id="distance_d_cap" step="any" placeholder="e.g., 0.001">
+
+                <label for="dielectric_kappa">Dielectric Constant ($\kappa$, dimensionless, 1 for vacuum):</label>
+                <input type="number" id="dielectric_kappa" step="any" placeholder="e.g., 1" value="1">
+
+                <button onclick="calculateCapacitance()">Calculate Capacitance (C)</button>
+                <div id="result_cap">Result: Farads (F)</div>
+            </section>
+
+            <section id="simulation" class="simulation-container">
+                <h3>Simulation: Parallel Plate Capacitor [cite: 24]</h3>
+                <p>Instructions:
+                <ol>
+                    <li>Adjust Plate Area, Plate Separation, and Dielectric Constant using the sliders. [cite: 24]</li>
+                    <li>Observe the visual representation of the capacitor (plates shown with user-defined spacing).
+                        [cite: 24]</li>
+                    <li>Calculated Capacitance and Stored Energy (assuming 1V potential difference) are displayed,
+                        showing live updates. [cite: 24]</li>
+                </ol>
+                </p>
+                <div class="simulation-controls">
+                    <div>
+                        <label for="capAreaSlider">Plate Area (relative): <span id="capAreaValue">50</span></label>
+                        <input type="range" id="capAreaSlider" min="10" max="100" value="50" step="1">
+                    </div>
+                    <div>
+                        <label for="capDistSlider">Plate Separation (relative): <span
+                                id="capDistValue">30</span></label>
+                        <input type="range" id="capDistSlider" min="5" max="50" value="30" step="1">
+                    </div>
+                    <div>
+                        <label for="capKappaSlider">Dielectric Constant ($\kappa$): <span
+                                id="capKappaValue">1.0</span></label>
+                        <input type="range" id="capKappaSlider" min="1" max="10" value="1" step="0.1">
+                    </div>
+                    <p>Calculated Capacitance: <span id="simCapacitanceDisplay">N/A</span> F</p>
+                    <p>Stored Energy (at 1V): <span id="simEnergyDisplay">N/A</span> J</p>
+                </div>
+                <div id="capacitorSimulationCanvas"></div>
+            </section>
+
+            <section id="quiz" class="quiz-section">
+                <h3>Quiz: Capacitance and Dielectrics</h3>
+                <div class="quiz-question" id="q1_cap">
+                    <p>1. A capacitor stores: [cite: 25]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q1_cap')">a) Current</li>
+                        <li onclick="handleQuizClick(event, 'q1_cap')">b) Voltage</li>
+                        <li onclick="handleQuizClick(event, 'q1_cap')" data-correct="true">c) Charge</li>
+                        <li onclick="handleQuizClick(event, 'q1_cap')">d) Resistance</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q2_cap">
+                    <p>2. Unit of capacitance: [cite: 25]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q2_cap')">a) Ampere</li>
+                        <li onclick="handleQuizClick(event, 'q2_cap')" data-correct="true">b) Farad</li>
+                        <li onclick="handleQuizClick(event, 'q2_cap')">c) Henry</li>
+                        <li onclick="handleQuizClick(event, 'q2_cap')">d) Coulomb</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q3_cap">
+                    <p>3. Capacitance of a parallel plate capacitor increases when: [cite: 25]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q3_cap')">a) Plate separation increases</li>
+                        <li onclick="handleQuizClick(event, 'q3_cap')">b) Dielectric constant decreases (assuming it's
+                            >1 initially)</li>
+                        <li onclick="handleQuizClick(event, 'q3_cap')" data-correct="true">c) Plate area increases</li>
+                        <li onclick="handleQuizClick(event, 'q3_cap')">d) Voltage increases</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q4_cap">
+                    <p>4. Inserting a dielectric material between the plates of a capacitor typically: [cite: 26]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q4_cap')">a) Decreases capacitance</li>
+                        <li onclick="handleQuizClick(event, 'q4_cap')">b) Increases the resistance significantly (though
+                            they are insulators, primary effect is on C)</li>
+                        <li onclick="handleQuizClick(event, 'q4_cap')" data-correct="true">c) Increases capacitance</li>
+                        <li onclick="handleQuizClick(event, 'q4_cap')">d) Decreases the stored voltage (if isolated and
+                            charge is constant)</li>
+                    </ul>
+                    <div class="quiz-feedback"> (Note: The primary function of a dielectric in this context is to
+                        increase capacitance.) [cite: 26]</div>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <footer>
+        <p>Physics 2 Interactive Learning &copy; 2025</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="simulations/chapter4_simulation.js"></script>
+</body>
+
+</html>

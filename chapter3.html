@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 25: Electric Potential - Physics 2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="index.html">Physics 2</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chapter1.html">Electric Fields</a></li>
+                    <li><a href="chapter2.html">Gauss's Law</a></li>
+                    <li class="current"><a href="chapter3.html">Electric Potential</a></li>
+                    <li><a href="chapter4.html">Capacitance</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article class="chapter-content">
+            <h2>Chapter 25: Electric Potential</h2>
+
+            <section id="introduction">
+                <h3>Introduction [cite: 16]</h3>
+                <p>Electric potential is the electric potential energy per unit charge at a point in an electric field.
+                    It’s a scalar quantity, unlike the electric field. Equipotential surfaces are surfaces where the
+                    electric potential is the same at every point. [cite: 17]</p>
+            </section>
+
+            <section id="key-formulas" class="key-formulas">
+                <h3>Key Formulas [cite: 18]</h3>
+                <ul>
+                    <li>$V = U / q$ (Electric Potential V, Potential Energy U, charge q)</li>
+                    <li>$V = k * q / r$ (Electric Potential due to a point charge)</li>
+                    <li>$\Delta U = q * \Delta V$ (Change in Potential Energy)</li>
+                    <li>$E = -dV / dx$ (Electric field as the negative gradient of potential, in 1D)</li>
+                </ul>
+            </section>
+
+            <section id="calculator" class="calculator">
+                <h3>Electric Potential Calculator (Point Charge) [cite: 18]</h3>
+                <label for="charge_q_ep">Charge (q, in Coulombs C):</label>
+                <input type="number" id="charge_q_ep" step="any" placeholder="e.g., 1.6e-19">
+
+                <label for="distance_r_ep">Distance (r, in meters m):</label>
+                <input type="number" id="distance_r_ep" step="any" placeholder="e.g., 0.1">
+
+                <button onclick="calculateElectricPotential()">Calculate Electric Potential (V)</button>
+                <div id="result_ep">Result: Volts (V)</div>
+            </section>
+
+            <section id="simulation" class="simulation-container">
+                <h3>Simulation: Equipotential Lines and Potential Value [cite: 19]</h3>
+                <p>Instructions:
+                <ol>
+                    <li>Charges are shown; you can add more. Equipotential lines (surfaces of constant voltage) are
+                        visualized around them. [cite: 19]</li>
+                    <li>Color gradient may represent potential values (simulation shows lines, mouse displays value).
+                        [cite: 19]</li>
+                    <li>Move your mouse over the canvas: the potential at the cursor's position will be displayed.
+                        (Dragging test charge shows its potential is a feature from document). [cite: 19]</li>
+                </ol>
+                </p>
+                <div class="simulation-controls">
+                    <button id="addPositiveChargeBtnPotential">Add Positive Charge (+1nC)</button>
+                    <button id="addNegativeChargeBtnPotential">Add Negative Charge (-1nC)</button>
+                    <button id="clearChargesBtnPotential">Clear Charges</button>
+                    <p>Potential at mouse: <span id="potentialValueDisplay">N/A</span> V</p>
+                </div>
+                <div id="electricPotentialSimulationCanvas"></div>
+            </section>
+
+            <section id="quiz" class="quiz-section">
+                <h3>Quiz: Electric Potential</h3>
+                <div class="quiz-question" id="q1_ep">
+                    <p>1. The unit of electric potential is: [cite: 20]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q1_ep')">a) Newton</li>
+                        <li onclick="handleQuizClick(event, 'q1_ep')">b) Joule</li>
+                        <li onclick="handleQuizClick(event, 'q1_ep')" data-correct="true">c) Volt</li>
+                        <li onclick="handleQuizClick(event, 'q1_ep')">d) Ampere</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q2_ep">
+                    <p>2. A positive charge moves from a region of high potential to a region of low potential due to
+                        the electric field. Its electric potential energy: [cite: 20]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q2_ep')" data-correct="true">a) Decreases</li>
+                        <li onclick="handleQuizClick(event, 'q2_ep')">b) Increases</li>
+                        <li onclick="handleQuizClick(event, 'q2_ep')">c) Remains constant</li>
+                        <li onclick="handleQuizClick(event, 'q2_ep')">d) Becomes zero</li>
+                    </ul>
+                    <div class="quiz-feedback"> (Original doc: "Lose potential energy" for "positive charge in an
+                        electric field will:") [cite: 20]</div>
+                </div>
+                <div class="quiz-question" id="q3_ep">
+                    <p>3. Electric potential is: [cite: 20]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q3_ep')">a) A vector</li>
+                        <li onclick="handleQuizClick(event, 'q3_ep')" data-correct="true">b) A scalar</li>
+                        <li onclick="handleQuizClick(event, 'q3_ep')">c) Imaginary</li>
+                        <li onclick="handleQuizClick(event, 'q3_ep')">d) Not defined</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q4_ep">
+                    <p>4. Equipotential lines are always: [cite: 21]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q4_ep')">a) Random</li>
+                        <li onclick="handleQuizClick(event, 'q4_ep')">b) Parallel to electric field lines</li>
+                        <li onclick="handleQuizClick(event, 'q4_ep')" data-correct="true">c) Perpendicular to electric
+                            field lines</li>
+                        <li onclick="handleQuizClick(event, 'q4_ep')">d) Concentric circles only</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <footer>
+        <p>Physics 2 Interactive Learning &copy; 2025</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="simulations/chapter3_simulation.js"></script>
+</body>
+
+</html>

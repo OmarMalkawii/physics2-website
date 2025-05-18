@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 23: Electric Fields - Physics 2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="index.html">Physics 2</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="current"><a href="chapter1.html">Electric Fields</a></li>
+                    <li><a href="chapter2.html">Gauss's Law</a></li>
+                    <li><a href="chapter3.html">Electric Potential</a></li>
+                    <li><a href="chapter4.html">Capacitance</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article class="chapter-content">
+            <h2>Chapter 23: Electric Fields</h2>
+
+            <section id="introduction">
+                <h3>Introduction</h3>
+                <p>Electric fields are created by electric charges and exert forces on other electric charges. The
+                    direction of the electric field is the direction a positive test charge would move. Electric field
+                    lines indicate the direction and strength of the field. [cite: 3]</p>
+            </section>
+
+            <section id="key-formulas" class="key-formulas">
+                <h3>Key Formulas [cite: 6]</h3>
+                <ul>
+                    <li>$E = F / q$ (Electric field E, Force F, charge q)</li>
+                    <li>$F = k * q1 * q2 / r^2$ (Coulomb's Law)</li>
+                    <li>$E = k * q / r^2$ (Electric field due to a point charge)</li>
+                    <li>$E_{total} = \Sigma E_i$ (Superposition principle)</li>
+                </ul>
+            </section>
+
+            <section id="calculator" class="calculator">
+                <h3>Electric Field Calculator (Point Charge) [cite: 6]</h3>
+                <label for="charge_q">Charge (q, in Coulombs C):</label>
+                <input type="number" id="charge_q" step="any" placeholder="e.g., 1.6e-19">
+
+                <label for="distance_r">Distance (r, in meters m):</label>
+                <input type="number" id="distance_r" step="any" placeholder="e.g., 0.1">
+
+                <button onclick="calculateElectricField()">Calculate Electric Field (E)</button>
+                <div id="result_ef">Result: N/C</div>
+            </section>
+
+            <section id="simulation" class="simulation-container">
+                <h3>Simulation: Visualizing Electric Fields [cite: 7]</h3>
+                <p>Instructions:
+                <ol>
+                    <li>Click 'Add Positive' or 'Add Negative' to place charges. [cite: 7]</li>
+                    <li>Drag charges to move them. [cite: 7]</li>
+                    <li>Field vectors show direction and relative strength (longer = stronger). Field lines are
+                        color-coded (blue for positive, red for negative in original instructions, simulation uses green
+                        for field lines, red/blue for charges). [cite: 7, 8]</li>
+                </ol>
+                </p>
+                <div class="simulation-controls">
+                    <button id="addPositiveChargeBtn">Add Positive Charge (+1nC)</button>
+                    <button id="addNegativeChargeBtn">Add Negative Charge (-1nC)</button>
+                    <button id="clearChargesBtn">Clear Charges</button>
+                </div>
+                <div id="electricFieldSimulationCanvas"></div>
+            </section>
+
+            <section id="quiz" class="quiz-section">
+                <h3>Quiz: Electric Fields</h3>
+                <div class="quiz-question" id="q1_ef">
+                    <p>1. What is the direction of the electric field due to a positive charge? [cite: 8]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q1_ef')">a) Toward the charge</li>
+                        <li onclick="handleQuizClick(event, 'q1_ef')" data-correct="true">b) Away from the charge</li>
+                        <li onclick="handleQuizClick(event, 'q1_ef')">c) Circular</li>
+                        <li onclick="handleQuizClick(event, 'q1_ef')">d) None</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q2_ef">
+                    <p>2. What is the SI unit of electric field? [cite: 9]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q2_ef')">a) Volt</li>
+                        <li onclick="handleQuizClick(event, 'q2_ef')">b) Newton</li>
+                        <li onclick="handleQuizClick(event, 'q2_ef')" data-correct="true">c) N/C</li>
+                        <li onclick="handleQuizClick(event, 'q2_ef')">d) J/C</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q3_ef">
+                    <p>3. Two like charges will: [cite: 10]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q3_ef')">a) Attract each other</li>
+                        <li onclick="handleQuizClick(event, 'q3_ef')" data-correct="true">b) Repel each other</li>
+                        <li onclick="handleQuizClick(event, 'q3_ef')">c) Stay in place</li>
+                        <li onclick="handleQuizClick(event, 'q3_ef')">d) Convert energy</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q4_ef">
+                    <p>4. If the charge increases, what happens to the field strength (at a fixed distance)? [cite: 11]
+                    </p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q4_ef')">a) It decreases</li>
+                        <li onclick="handleQuizClick(event, 'q4_ef')">b) It remains the same</li>
+                        <li onclick="handleQuizClick(event, 'q4_ef')" data-correct="true">c) It increases</li>
+                        <li onclick="handleQuizClick(event, 'q4_ef')">d) It becomes zero</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <footer>
+        <p>Physics 2 Interactive Learning &copy; 2025</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="simulations/chapter1_simulation.js"></script>
+</body>
+
+</html>

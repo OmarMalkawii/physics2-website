@@ -1,0 +1,276 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Header and Navigation */
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    float: right;
+}
+
+header li {
+    display: inline;
+    padding: 0 20px 0 20px;
+}
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+/* Hero Section for Landing Page */
+.hero {
+    min-height: 400px;
+    background: url('landing.png') no-repeat center center/cover;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.hero p {
+    font-size: 20px;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+/* Chapter Page Specifics */
+.chapter-content {
+    padding: 20px;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-content h2 {
+    color: #0779e4;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 10px;
+}
+
+.chapter-content h3 {
+    color: #333;
+    margin-top: 20px;
+}
+
+.key-formulas ul {
+    list-style: none;
+    padding: 0;
+}
+
+.key-formulas li {
+    background: #eef;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-left: 3px solid #0779e4;
+}
+
+/* Calculator Styles */
+.calculator {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.calculator label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.calculator input[type="number"],
+.calculator input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.calculator button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #0779e4;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.calculator button:hover {
+    background: #0056b3;
+}
+
+.calculator #result,
+.calculator div[id^="result_"] {
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 10px;
+    background: #e0e0e0;
+    border-radius: 3px;
+}
+
+/* Simulation Styles */
+.simulation-container {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.simulation-container canvas {
+    display: block;
+    /* Prevents extra space below canvas */
+    margin: 0 auto 10px auto;
+    /* Center canvas and add margin below */
+    border: 1px solid #aaa;
+}
+
+.simulation-controls {
+    text-align: center;
+    padding: 10px;
+}
+
+.simulation-controls label,
+.simulation-controls button,
+.simulation-controls input {
+    margin: 5px;
+}
+
+.simulation-controls input[type="range"] {
+    width: 150px;
+}
+
+/* Quiz Styles */
+.quiz-section {
+    margin-top: 20px;
+}
+
+.quiz-question {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.quiz-question p {
+    font-weight: bold;
+}
+
+.quiz-question ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.quiz-question li {
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    /* For consistent sizing */
+    transition: background-color 0.3s;
+}
+
+.quiz-question li:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+    border-color: #b8c6d4;
+    /* Lighter border on hover */
+}
+
+.quiz-question li.selected {
+    background-color: #cce7ff;
+    /* Light blue for selected */
+    border-color: #99cfff;
+}
+
+.quiz-question li.correct {
+    background-color: #d4edda !important;
+    /* Green for correct, important to override hover/selected */
+    color: #155724;
+    border-left: 5px solid #28a745;
+}
+
+.quiz-question li.incorrect {
+    background-color: #f8d7da !important;
+    /* Red for incorrect, important to override hover/selected */
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+}
+
+.quiz-feedback {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.quiz-feedback.correct-feedback {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.quiz-feedback.incorrect-feedback {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    background: #333;
+    color: #fff;
+}

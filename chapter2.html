@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 24: Gauss's Law - Physics 2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="index.html">Physics 2</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chapter1.html">Electric Fields</a></li>
+                    <li class="current"><a href="chapter2.html">Gauss's Law</a></li>
+                    <li><a href="chapter3.html">Electric Potential</a></li>
+                    <li><a href="chapter4.html">Capacitance</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article class="chapter-content">
+            <h2>Chapter 24: Gauss’s Law</h2>
+
+            <section id="introduction">
+                <h3>Introduction [cite: 11]</h3>
+                <p>Gauss’s Law provides a method to calculate electric fields using symmetry. It states that the total
+                    electric flux through a closed surface is equal to the charge enclosed divided by the permittivity
+                    of free space ($\epsilon_0$). [cite: 12]</p>
+            </section>
+
+            <section id="key-formulas" class="key-formulas">
+                <h3>Key Formulas [cite: 13]</h3>
+                <ul>
+                    <li>$\Phi = q / \epsilon_0$ (Electric Flux $\Phi$, charge q, permittivity of free space
+                        $\epsilon_0$)</li>
+                    <li>$\Phi = \oint E \cdot dA$ (Electric Flux as surface integral of Electric Field E over area A)
+                    </li>
+                </ul>
+            </section>
+
+            <section id="calculator" class="calculator">
+                <h3>Electric Flux Calculator (Gauss's Law) [cite: 13]</h3>
+                <label for="charge_q_gl">Enclosed Charge (q, in Coulombs C):</label>
+                <input type="number" id="charge_q_gl" step="any" placeholder="e.g., 1e-9 for 1nC">
+
+                <label for="epsilon_0_display">Permittivity of Free Space ($\epsilon_0$):</label>
+                <input type="text" id="epsilon_0_display" value="8.854e-12 C²/N·m²" readonly>
+
+                <button onclick="calculateElectricFlux()">Calculate Electric Flux ($\Phi$)</button>
+                <div id="result_gl">Result: N·m²/C</div>
+            </section>
+
+            <section id="simulation" class="simulation-container">
+                <h3>Simulation: Gauss's Law Visualization [cite: 13]</h3>
+                <p>Instructions:
+                <ol>
+                    <li>A point charge is at the center. [cite: 14]</li>
+                    <li>Adjust the enclosed charge using the slider. [cite: 14]</li>
+                    <li>A spherical Gaussian surface is shown. The number of field lines visually represents the flux.
+                        [cite: 14]</li>
+                    <li>Observe how the flux (number of lines crossing the surface) changes with the charge. [cite: 14]
+                    </li>
+                </ol>
+                </p>
+                <div class="simulation-controls">
+                    <label for="gaussChargeSlider">Enclosed Charge (nC): <span id="gaussChargeValue">1</span> nC</label>
+                    <input type="range" id="gaussChargeSlider" min="-5" max="5" value="1" step="0.5">
+                </div>
+                <div id="gaussLawSimulationCanvas"></div>
+            </section>
+
+            <section id="quiz" class="quiz-section">
+                <h3>Quiz: Gauss's Law</h3>
+                <div class="quiz-question" id="q1_gl">
+                    <p>1. Gauss’s Law relates electric flux to: [cite: 15]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q1_gl')">a) Electric field</li>
+                        <li onclick="handleQuizClick(event, 'q1_gl')" data-correct="true">b) Charge enclosed</li>
+                        <li onclick="handleQuizClick(event, 'q1_gl')">c) Volume</li>
+                        <li onclick="handleQuizClick(event, 'q1_gl')">d) Current</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q2_gl">
+                    <p>2. Electric flux through a closed surface with no charge inside is: [cite: 15]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q2_gl')">a) Maximum</li>
+                        <li onclick="handleQuizClick(event, 'q2_gl')">b) Equal to charge</li>
+                        <li onclick="handleQuizClick(event, 'q2_gl')" data-correct="true">c) Zero</li>
+                        <li onclick="handleQuizClick(event, 'q2_gl')">d) Infinite</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q3_gl">
+                    <p>3. Flux lines go outward if the enclosed charge is: [cite: 15]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q3_gl')">a) Negative</li>
+                        <li onclick="handleQuizClick(event, 'q3_gl')" data-correct="true">b) Positive</li>
+                        <li onclick="handleQuizClick(event, 'q3_gl')">c) Neutral</li>
+                        <li onclick="handleQuizClick(event, 'q3_gl')">d) Mixed</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" id="q4_gl">
+                    <p>4. Electric flux units are: [cite: 16]</p>
+                    <ul>
+                        <li onclick="handleQuizClick(event, 'q4_gl')" data-correct="true">a) N·m²/C</li>
+                        <li onclick="handleQuizClick(event, 'q4_gl')">b) C/m²</li>
+                        <li onclick="handleQuizClick(event, 'q4_gl')">c) J/C</li>
+                        <li onclick="handleQuizClick(event, 'q4_gl')">d) V/m</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <footer>
+        <p>Physics 2 Interactive Learning &copy; 2025</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="simulations/chapter2_simulation.js"></script>
+</body>
+
+</html>
